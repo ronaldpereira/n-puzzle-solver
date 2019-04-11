@@ -5,6 +5,7 @@ import libs.stateTree as STTREE
 
 class BreadthFirstSearch:
     def __init__(self, initialPuzzle, answerPuzzle):
+        self.totalExpansions = 0
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = Queue()
         self.frontier.put(STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n))
@@ -28,17 +29,18 @@ class BreadthFirstSearch:
                 self.insertedPuzzles.append(node.puzzle)
 
                 if self.checkNodeSolution(node.puzzle):
-                    return 'solved'
+                    return self.totalExpansions
 
     def execute(self):
         while self.frontier.qsize() > 0:
             actualNode = self.frontier.get()
 
             if self.checkNodeSolution(actualNode.puzzle):
-                return 'solved'
+                return self.totalExpansions
 
             else:
                 actualNode.expand()
+                self.totalExpansions += 1
 
                 self.checkNode(actualNode.up)
                 self.checkNode(actualNode.down)

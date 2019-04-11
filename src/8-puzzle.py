@@ -10,4 +10,4 @@ answer = PUZZLE.AnswerPuzzle(3)
 
 bfs = BFS.BreadthFirstSearch(deepcopy(puzzle), deepcopy(answer))
 
-print(bfs.execute())
+print("Total node expansions: %d" %bfs.execute())
