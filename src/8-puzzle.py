@@ -1,7 +1,13 @@
+import numpy as np
+
 import libs.puzzle as PUZZLE
 import libs.stateTree as TREE
 
-puzzleMap = PUZZLE.Puzzle()
+puzzleMap = PUZZLE.Puzzle(3, False)
+answerMap = PUZZLE.AnswerPuzzle(3)
+
+# print(np.array_equal(puzzleMap.puzzle, answerMap.puzzle)) # Compares two array if equals
+
 tree = TREE.StateTree(puzzleMap.puzzle, puzzleMap.n)
 tree.nextMoves()
 
