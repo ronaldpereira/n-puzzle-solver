@@ -1,4 +1,5 @@
 from copy import deepcopy
+import numpy as np
 
 class StateTree:
 	def __init__(self, puzzle, n):
@@ -31,38 +32,28 @@ class StateTree:
 
 	def moveSpaceUp(self, spaceX, spaceY):
 		upPuzzle = deepcopy(self.puzzle)
-		upPuzzle[spaceX][spaceY] = upPuzzle[spaceX-1][spaceY]
-		upPuzzle[spaceX-1][spaceY] = 0
+		upPuzzle[spaceX, spaceY], upPuzzle[spaceX-1, spaceY] = upPuzzle[spaceX-1, spaceY], upPuzzle[spaceX, spaceY]
 
 		return upPuzzle
 
 	def moveSpaceDown(self, spaceX, spaceY):
 		downPuzzle = deepcopy(self.puzzle)
-		downPuzzle[spaceX][spaceY] = downPuzzle[spaceX+1][spaceY]
-		downPuzzle[spaceX+1][spaceY] = 0
+		downPuzzle[spaceX, spaceY], downPuzzle[spaceX+1, spaceY] = downPuzzle[spaceX+1, spaceY], downPuzzle[spaceX, spaceY]
 
 		return downPuzzle
 
 	def moveSpaceLeft(self, spaceX, spaceY):
 		leftPuzzle = deepcopy(self.puzzle)
-		leftPuzzle[spaceX][spaceY] = leftPuzzle[spaceX][spaceY-1]
-		leftPuzzle[spaceX][spaceY-1] = 0
+		leftPuzzle[spaceX, spaceY], leftPuzzle[spaceX, spaceY-1] = leftPuzzle[spaceX, spaceY-1], leftPuzzle[spaceX, spaceY]
 
 		return leftPuzzle
 
 	def moveSpaceRight(self, spaceX, spaceY):
 		rightPuzzle = deepcopy(self.puzzle)
-		rightPuzzle[spaceX][spaceY] = rightPuzzle[spaceX][spaceY+1]
-		rightPuzzle[spaceX][spaceY+1] = 0
+		rightPuzzle[spaceX, spaceY], rightPuzzle[spaceX, spaceY+1] = rightPuzzle[spaceX, spaceY+1], rightPuzzle[spaceX, spaceY]
 
 		return rightPuzzle
 
 	def findEmptySpace(self):
-		for x in range(len(self.puzzle[0])):
-			try:
-				y = self.puzzle[x].index(0)
-
-				return x, y
-
-			except ValueError:
-				continue
+		coord = np.where(self.puzzle == 0)
+		return coord[0][0], coord[1][0]
