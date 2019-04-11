@@ -1,3 +1,5 @@
 import libs.puzzle as PUZZLE
+import libs.stateTree as TREE
 
-PUZZLE.Puzzle()
+puzzleMap = PUZZLE.Puzzle()
+TREE.StateTree(puzzleMap.puzzle)
