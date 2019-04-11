@@ -10,7 +10,7 @@ class StateTree:
 		self.left = None
 		self.right = None
 
-	def nextMoves(self):
+	def expand(self):
 		spaceX, spaceY = self.findEmptySpace()
 
 		if spaceX > 0:
@@ -27,8 +27,7 @@ class StateTree:
 
 		if spaceY < self.n-1:
 			rightPuzzle = self.moveSpaceRight(spaceX, spaceY)
-			self.right = StateTree(rightPuzzle, self.n)
-		
+			self.right = StateTree(rightPuzzle, self.n)		
 
 	def moveSpaceUp(self, spaceX, spaceY):
 		upPuzzle = deepcopy(self.puzzle)
