@@ -1,5 +1,6 @@
-import libs.stateTree as STTREE
 import numpy as np
+
+import libs.stateTree as STTREE
 
 class UniformCostSearch:
     def __init__(self, initialPuzzle, answerPuzzle):

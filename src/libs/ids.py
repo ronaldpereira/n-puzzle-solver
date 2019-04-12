@@ -1,7 +1,8 @@
-import libs.stateTree as STTREE
 from copy import deepcopy
 
 import numpy as np
+
+import libs.stateTree as STTREE
 
 class IterativeDeepeningSearch:
     def __init__(self, initialPuzzle, answerPuzzle, totalExpansions=0):

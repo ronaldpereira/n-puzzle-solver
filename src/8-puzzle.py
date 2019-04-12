@@ -3,10 +3,10 @@ from copy import deepcopy
 import numpy as np
 
 import libs.bfs as BFS
+import libs.ids as IDS
 import libs.puzzle as PUZZLE
 import libs.stateTree as STTREE
 import libs.ucs as UCS
-import libs.ids as IDS
 
 puzzle = PUZZLE.Puzzle(3)
 answer = PUZZLE.AnswerPuzzle(3)
