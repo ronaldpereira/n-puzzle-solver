@@ -40,11 +40,11 @@ class AStar:
         if node:
             isInserted, insertedIndex = self.isPuzzleAlreadyInserted(node.puzzle)
             if not isInserted:
-                self.frontier.append((node, actualCost + self.manhattanDistance(node.puzzle), actualCost+1))
+                self.frontier.append((node, actualCost + 1 + self.manhattanDistance(node.puzzle), actualCost+1))
 
             else:
-                if actualCost + self.manhattanDistance(node.puzzle) < self.frontier[insertedIndex][1]:
-                    self.frontier[insertedIndex] = (node, actualCost + self.manhattanDistance(node.puzzle), actualCost+1)
+                if actualCost + 1 + self.manhattanDistance(node.puzzle) < self.frontier[insertedIndex][1]:
+                    self.frontier[insertedIndex] = (node, actualCost + 1 + self.manhattanDistance(node.puzzle), actualCost+1)
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])

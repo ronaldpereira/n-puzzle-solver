@@ -30,23 +30,10 @@ class GreedyFirstSearch:
     def checkNodeSolution(self, nodePuzzle):
         return np.array_equal(nodePuzzle, self.answerPuzzle)
 
-    def isPuzzleAlreadyInserted(self, nodePuzzle):
-        for index in range(len(self.frontier)):
-            if np.array_equal(nodePuzzle, self.frontier[index][0].puzzle):
-                return True, index
-
-        return False, None
-
     def insertNodeToFrontier(self, node, actualCost):
         # If the node action exists and it's not already included in the tree
         if node:
-            isInserted, insertedIndex = self.isPuzzleAlreadyInserted(node.puzzle)
-            if not isInserted:
-                self.frontier.append((node, self.numberOfWrongPieces(node.puzzle), actualCost+1))
-
-            else:
-                if self.numberOfWrongPieces(node.puzzle) < self.frontier[insertedIndex][1]:
-                    self.frontier[insertedIndex] = (node, self.numberOfWrongPieces(node.puzzle), actualCost+1)
+            self.frontier.append((node, self.numberOfWrongPieces(node.puzzle), actualCost+1))
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])

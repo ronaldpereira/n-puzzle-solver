@@ -8,13 +8,13 @@ class BreadthFirstSearch:
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
         self.frontier.append((STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), 0))
-        self.insertedPuzzles = [initialPuzzle.puzzle]
+        self.exploredPuzzles = [initialPuzzle.puzzle]
 
     def checkNodeSolution(self, nodePuzzle):
         return np.array_equal(nodePuzzle, self.answerPuzzle)
 
     def isPuzzleAlreadyInserted(self, nodePuzzle):
-        for insertedPuzzle in self.insertedPuzzles:
+        for insertedPuzzle in self.exploredPuzzles:
             if np.array_equal(nodePuzzle, insertedPuzzle):
                 return True
 
@@ -25,7 +25,7 @@ class BreadthFirstSearch:
         if node:
             if not self.isPuzzleAlreadyInserted(node.puzzle):
                 self.frontier.append((node, actualCost+1))
-                self.insertedPuzzles.append(node.puzzle)
+                self.exploredPuzzles.append(node.puzzle)
 
     def execute(self):
         while len(self.frontier) > 0:

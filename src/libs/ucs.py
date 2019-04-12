@@ -8,24 +8,34 @@ class UniformCostSearch:
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
         self.frontier.append((STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), 0))
-        self.insertedPuzzles = [initialPuzzle.puzzle]
+        self.exploredPuzzles = [initialPuzzle.puzzle]
 
     def checkNodeSolution(self, nodePuzzle):
         return np.array_equal(nodePuzzle, self.answerPuzzle)
 
     def isPuzzleAlreadyInserted(self, nodePuzzle):
-        for insertedPuzzle in self.insertedPuzzles:
-            if np.array_equal(nodePuzzle, insertedPuzzle):
-                return True
+        for index in range(len(self.frontier)):
+            if np.array_equal(nodePuzzle, self.frontier[index][0].puzzle):
+                return True, index
 
-        return False
+        for insertedPuzzle in self.exploredPuzzles:
+            if np.array_equal(nodePuzzle, insertedPuzzle):
+                return True, None
+
+        return False, None
 
     def insertNodeToFrontier(self, node, actualCost):
         # If the node action exists and it's not already included in the tree
         if node:
-            if not self.isPuzzleAlreadyInserted(node.puzzle):
+            isInserted, frontierIndex = self.isPuzzleAlreadyInserted(node.puzzle)
+            if not isInserted:
                 self.frontier.append((node, actualCost+1))
-                self.insertedPuzzles.append(node.puzzle)
+                self.exploredPuzzles.append(node.puzzle)
+
+            else:
+                if frontierIndex:
+                    if actualCost < self.frontier[frontierIndex][1]:
+                        self.frontier[frontierIndex] = (node, actualCost+1)
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])

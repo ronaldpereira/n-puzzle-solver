@@ -11,29 +11,20 @@ class IterativeDeepeningSearch:
         self.answerPuzzle = answerPuzzle
         self.frontier = []
         self.frontier.append((STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), 0, 0))
-        self.insertedPuzzles = [initialPuzzle.puzzle]
 
     def checkNodeSolution(self, nodePuzzle):
         return np.array_equal(nodePuzzle, self.answerPuzzle.puzzle)
 
-    def isPuzzleAlreadyInserted(self, nodePuzzle):
-        for insertedPuzzle in self.insertedPuzzles:
-            if np.array_equal(nodePuzzle, insertedPuzzle):
-                return True
-
-        return False
-
     def insertNodeToFrontier(self, node, actualCost, actualLevel):
         # If the node action exists and it's not already included in the tree
         if node:
-            if not self.isPuzzleAlreadyInserted(node.puzzle):
-                self.frontier.append((node, actualCost+1, actualLevel+1))
-                self.insertedPuzzles.append(node.puzzle)
+            self.frontier.append((node, actualCost+1, actualLevel+1))
 
     def execute(self):
         actualMaxLevel = 0
         while True:
             while len(self.frontier) > 0:
+                # Make the actual level infinite so the while can take effect
                 actualLevel = float('inf')
                 while actualLevel > actualMaxLevel and len(self.frontier) > 0:
                     actualNode, actualCost, actualLevel = self.frontier.pop()
