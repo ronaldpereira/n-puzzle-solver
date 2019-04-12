@@ -18,8 +18,9 @@ class AStar:
                 if not (x == len(actualPuzzle)-1 and y == len(actualPuzzle[x])-1):
                     actualCoord = np.where(actualPuzzle == actualPiece)
                     coordX, coordY = actualCoord[0][0], actualCoord[1][0]
-
+                    
                     totalDist += abs(x-coordX) + abs(y-coordY)
+
                     actualPiece += 1
 
         return totalDist

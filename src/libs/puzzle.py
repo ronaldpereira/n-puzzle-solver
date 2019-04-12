@@ -12,8 +12,8 @@ class Puzzle:
         if randomize:
             # np.random.shuffle(self.puzzle)
             # self.puzzle = np.array([1, 2, 3, 4, 5, 6, 7, 0, 8]) # solucao 2 do npuzzle
-            # self.puzzle = np.array([1, 5, 2, 0, 4, 3, 7, 8, 6]) # solucao 5 do npuzzle
-            self.puzzle = np.array([5, 8, 2, 1, 0, 3, 4, 7, 6]) # solucao 10 do npuzzle
+            self.puzzle = np.array([1, 5, 2, 0, 4, 3, 7, 8, 6]) # solucao 5 do npuzzle
+            # self.puzzle = np.array([5, 8, 2, 1, 0, 3, 4, 7, 6]) # solucao 10 do npuzzle
             # self.puzzle = np.array([8, 0, 2, 5, 7, 3, 1, 4, 6]) # solucao 15 do npuzzle
             # self.puzzle = np.array([8, 7, 0, 5, 4, 2, 1, 6, 3]) # solucao 20 do npuzzle
             # self.puzzle = np.array([8, 6, 7, 2, 5, 4, 3, 0, 1]) # solucao 31 do npuzzle
