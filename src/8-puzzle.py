@@ -7,6 +7,7 @@ import libs.ids as IDS
 import libs.puzzle as PUZZLE
 import libs.stateTree as STTREE
 import libs.ucs as UCS
+import libs.astar as ASTAR
 
 puzzle = PUZZLE.Puzzle(3)
 answer = PUZZLE.AnswerPuzzle(3)
@@ -22,3 +23,7 @@ print("\nUCS\nTotal node expansions: %d\nTotal cost: %d" %(exps, cost))
 ids = IDS.IterativeDeepeningSearch(deepcopy(puzzle), deepcopy(answer))
 exps, cost = ids.execute()
 print("\nIDS\nTotal node expansions: %d\nTotal cost: %d" %(exps, cost))
+
+astar = ASTAR.AStar(deepcopy(puzzle), deepcopy(answer))
+exps, cost = astar.execute()
+print("\nASTAR\nTotal node expansions: %d\nTotal cost: %d" %(exps, cost))
