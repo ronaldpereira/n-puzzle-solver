@@ -1,13 +1,24 @@
 from copy import deepcopy
 
+import numpy as np
+
 import libs.bfs as BFS
 import libs.puzzle as PUZZLE
 import libs.stateTree as STTREE
-import numpy as np
+import libs.ucs as UCS
+import libs.ids as IDS
 
 puzzle = PUZZLE.Puzzle(3)
 answer = PUZZLE.AnswerPuzzle(3)
 
 bfs = BFS.BreadthFirstSearch(deepcopy(puzzle), deepcopy(answer))
+exps, cost = bfs.execute()
+print("\nBFS\nTotal node expansions: %d\nTotal cost: %d" %(exps, cost))
 
-print("Total node expansions: %d" %bfs.execute())
+ucs = UCS.UniformCostSearch(deepcopy(puzzle), deepcopy(answer))
+exps, cost = ucs.execute()
+print("\nUCS\nTotal node expansions: %d\nTotal cost: %d" %(exps, cost))
+
+ids = IDS.IterativeDeepeningSearch(deepcopy(puzzle), deepcopy(answer))
+exps, cost = ids.execute()
+print("\nIDS\nTotal node expansions: %d\nTotal cost: %d" %(exps, cost))

@@ -1,7 +1,7 @@
 import libs.stateTree as STTREE
 import numpy as np
 
-class BreadthFirstSearch:
+class UniformCostSearch:
     def __init__(self, initialPuzzle, answerPuzzle):
         self.totalExpansions = 0
         self.answerPuzzle = answerPuzzle.puzzle
@@ -26,8 +26,12 @@ class BreadthFirstSearch:
                 self.frontier.append((node, actualCost+1))
                 self.insertedPuzzles.append(node.puzzle)
 
+    def sortFrontier(self):
+        self.frontier = sorted(self.frontier, key=lambda x: x[1])
+
     def execute(self):
         while len(self.frontier) > 0:
+            self.sortFrontier()
             actualNode, actualCost = self.frontier.pop(0)
 
             if self.checkNodeSolution(actualNode.puzzle):
