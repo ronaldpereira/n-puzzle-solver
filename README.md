@@ -1,4 +1,4 @@
-# 8 Puzzle Solver
+# 8-Puzzle Solver
 
 8-puzzle solver using Artificial Intelligence algorithms:
 
