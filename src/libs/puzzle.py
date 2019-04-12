@@ -21,4 +21,3 @@ class Puzzle:
 class AnswerPuzzle(Puzzle):
 	def __init__(self, n):
 		super(AnswerPuzzle, self).__init__(n, False)
-		

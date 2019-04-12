@@ -1,9 +1,9 @@
 from copy import deepcopy
-import numpy as np
 
 import libs.bfs as BFS
 import libs.puzzle as PUZZLE
 import libs.stateTree as STTREE
+import numpy as np
 
 puzzle = PUZZLE.Puzzle(3)
 answer = PUZZLE.AnswerPuzzle(3)
