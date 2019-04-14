@@ -31,7 +31,7 @@ class GreedyFirstSearch:
         return np.array_equal(nodePuzzle, self.answerPuzzle)
 
     def insertNodeToFrontier(self, node, actualCost):
-        # If the node action exists and it's not already included in the tree
+        # If the node action exists
         if node:
             self.frontier.append((node, self.numberOfWrongPieces(node.puzzle), actualCost+1))
 
