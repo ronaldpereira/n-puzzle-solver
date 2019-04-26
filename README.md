@@ -19,7 +19,7 @@ Also contains a n-Puzzle generator to generate solvable puzzles.
 ## Arguments for solver
 
 ```text
-usage: solver.py [-h] [-o OUTPUT_PATH] [-a A_STAR_ONLY] input_file
+usage: solver.py [-h] [-o OUTPUT_PATH] [-a] input_file
 
 n-puzzle solver using several Artificial Intelligence algorithms.
 
@@ -30,9 +30,8 @@ optional arguments:
   -h, --help            show this help message and exit
   -o OUTPUT_PATH, --output_path OUTPUT_PATH
                         Output folder path. (Default:"./output/")
-  -a A_STAR_ONLY, --a_star_only A_STAR_ONLY
-                        Use only a-star algorithm. Recommended for n-puzzles n
-                        > 3. (Default: 0)
+  -a, --a_star_only     Use only a-star algorithm. Recommended for n-puzzles,
+                        n > 3. (Default: False)
 ```
 
 ## Arguments for generator

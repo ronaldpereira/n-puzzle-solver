@@ -11,8 +11,8 @@ def parser():
     # Optional arguments
     parser.add_argument('-o', '--output_path', type=str, default='./output/',
                         help='Output folder path. (Default:"./output/")')
-    parser.add_argument('-a', '--a_star_only', type=int, default=0,
-                        help='Use only a-star algorithm. Recommended for n-puzzles n > 3. (Default: 0)')
+    parser.add_argument('-a', '--a_star_only', action='store_true',
+                        help='Use only a-star algorithm. Recommended for n-puzzles, n > 3. (Default: False)')
 
     args = parser.parse_args()
 
