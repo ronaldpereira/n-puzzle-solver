@@ -65,19 +65,23 @@ class StateTree:
         coord = np.where(self.puzzle == 0)
         return coord[0][0], coord[1][0]
 
-    def printAnswerPath(self, algorithm, output_path):
+    def printAnswerPath(self, algorithm, expansions, cost, output_path):
         try:
             makedirs(output_path)
         except FileExistsError:
             pass
 
         with open(output_path+algorithm+'.txt', 'w') as outputFile:
+            outputFile.write("***%s statistics***\nTotal node expansions: %d\nTotal solution cost: %d\n" %
+                             (algorithm, expansions, cost))
+            outputFile.write('Solution path:\n')
+
+            puzzles = []
             node = self
-            while(True):
-                np.savetxt(outputFile, node.puzzle, fmt="%d", delimiter='\t')
-
+            while(node):
+                puzzles.append(node.puzzle)
                 node = node.father
-                if not node:
-                    break
 
-                outputFile.write('\n')
+            for i in reversed(range(len(puzzles))):
+                outputFile.write('\nStep #%d\n' %(len(puzzles) - i - 1))
+                np.savetxt(outputFile, puzzles[i], fmt="%d", delimiter='\t')
