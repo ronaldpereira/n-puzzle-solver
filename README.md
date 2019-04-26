@@ -1,6 +1,6 @@
-# 8-Puzzle Solver
+# n-Puzzle Solver
 
-8-puzzle solver using Artificial Intelligence algorithms:
+n-puzzle solver using Artificial Intelligence algorithms:
 
 - No-information search:
   - BFS (Breadth-First Search)
