@@ -2,12 +2,14 @@ import numpy as np
 
 import libs.stateTree as STTREE
 
+
 class GreedyFirstSearch:
     def __init__(self, initialPuzzle, answerPuzzle):
         self.totalExpansions = 0
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
-        self.frontier.append((STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), self.numberOfWrongPieces(initialPuzzle.puzzle), 0))
+        self.frontier.append((STTREE.StateTree(
+            initialPuzzle.puzzle, initialPuzzle.n), self.numberOfWrongPieces(initialPuzzle.puzzle), 0))
 
     def numberOfWrongPieces(self, actualPuzzle):
         # Calculates the number of pieces in the wrong position
@@ -33,7 +35,8 @@ class GreedyFirstSearch:
     def insertNodeToFrontier(self, node, actualCost):
         # If the node action exists
         if node:
-            self.frontier.append((node, self.numberOfWrongPieces(node.puzzle), actualCost+1))
+            self.frontier.append(
+                (node, self.numberOfWrongPieces(node.puzzle), actualCost+1))
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])
@@ -44,7 +47,7 @@ class GreedyFirstSearch:
             actualNode, _, actualCost = self.frontier.pop(0)
 
             if self.checkNodeSolution(actualNode.puzzle):
-                return self.totalExpansions, actualCost
+                return actualNode, self.totalExpansions, actualCost
 
             else:
                 actualNode.expand()

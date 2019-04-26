@@ -2,13 +2,15 @@ import numpy as np
 
 import libs.stateTree as STTREE
 
+
 class HillClimbing:
     def __init__(self, initialPuzzle, answerPuzzle, k):
         self.totalExpansions = 0
         self.k = k
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
-        self.frontier.append((STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), self.manhattanDistance(initialPuzzle.puzzle), 0))
+        self.frontier.append((STTREE.StateTree(
+            initialPuzzle.puzzle, initialPuzzle.n), self.manhattanDistance(initialPuzzle.puzzle), 0))
         self.path = []
 
     def manhattanDistance(self, actualPuzzle):
@@ -20,7 +22,7 @@ class HillClimbing:
                 if not (x == len(actualPuzzle)-1 and y == len(actualPuzzle[x])-1):
                     actualCoord = np.where(actualPuzzle == actualPiece)
                     coordX, coordY = actualCoord[0][0], actualCoord[1][0]
-                    
+
                     totalDist += abs(x-coordX) + abs(y-coordY)
 
                     actualPiece += 1
@@ -33,7 +35,8 @@ class HillClimbing:
     def insertNodeToFrontier(self, node, actualCost):
         # If the node action exists
         if node:
-            self.frontier.append((node, self.manhattanDistance(node.puzzle), actualCost+1))
+            self.frontier.append(
+                (node, self.manhattanDistance(node.puzzle), actualCost+1))
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])
@@ -64,7 +67,7 @@ class HillClimbing:
                     return None
 
             if self.checkNodeSolution(actualNode.puzzle):
-                return self.totalExpansions, actualCost
+                return actualNode, self.totalExpansions, actualCost
 
             else:
                 actualNode.expand()

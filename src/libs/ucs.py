@@ -2,12 +2,14 @@ import numpy as np
 
 import libs.stateTree as STTREE
 
+
 class UniformCostSearch:
     def __init__(self, initialPuzzle, answerPuzzle):
         self.totalExpansions = 0
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
-        self.frontier.append((STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), 0))
+        self.frontier.append(
+            (STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), 0))
         self.exploredPuzzles = [initialPuzzle.puzzle]
 
     def checkNodeSolution(self, nodePuzzle):
@@ -27,7 +29,8 @@ class UniformCostSearch:
     def insertNodeToFrontier(self, node, actualCost):
         # If the node action exists and it's not already included in the tree
         if node:
-            isInserted, frontierIndex = self.isPuzzleAlreadyInserted(node.puzzle)
+            isInserted, frontierIndex = self.isPuzzleAlreadyInserted(
+                node.puzzle)
             if not isInserted:
                 self.frontier.append((node, actualCost+1))
                 self.exploredPuzzles.append(node.puzzle)
@@ -46,7 +49,7 @@ class UniformCostSearch:
             actualNode, actualCost = self.frontier.pop(0)
 
             if self.checkNodeSolution(actualNode.puzzle):
-                return self.totalExpansions, actualCost
+                return actualNode, self.totalExpansions, actualCost
 
             else:
                 actualNode.expand()

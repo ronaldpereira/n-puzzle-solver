@@ -1,11 +1,14 @@
 from copy import deepcopy
+from os import makedirs
 
 import numpy as np
 
+
 class StateTree:
-    def __init__(self, puzzle, n):
+    def __init__(self, puzzle, n, father=None):
         self.n = n
         self.puzzle = puzzle
+        self.father = father
         self.up = None
         self.down = None
         self.left = None
@@ -16,44 +19,65 @@ class StateTree:
 
         if spaceX > 0:
             upPuzzle = self.moveSpaceUp(spaceX, spaceY)
-            self.up = StateTree(upPuzzle, self.n)
+            self.up = StateTree(upPuzzle, self.n, self)
 
         if spaceX < self.n-1:
             downPuzzle = self.moveSpaceDown(spaceX, spaceY)
-            self.down = StateTree(downPuzzle, self.n)
+            self.down = StateTree(downPuzzle, self.n, self)
 
         if spaceY > 0:
             leftPuzzle = self.moveSpaceLeft(spaceX, spaceY)
-            self.left = StateTree(leftPuzzle, self.n)
+            self.left = StateTree(leftPuzzle, self.n, self)
 
         if spaceY < self.n-1:
             rightPuzzle = self.moveSpaceRight(spaceX, spaceY)
-            self.right = StateTree(rightPuzzle, self.n)		
+            self.right = StateTree(rightPuzzle, self.n, self)
 
     def moveSpaceUp(self, spaceX, spaceY):
         upPuzzle = deepcopy(self.puzzle)
-        upPuzzle[spaceX, spaceY], upPuzzle[spaceX-1, spaceY] = upPuzzle[spaceX-1, spaceY], upPuzzle[spaceX, spaceY]
+        upPuzzle[spaceX, spaceY], upPuzzle[spaceX-1,
+                                           spaceY] = upPuzzle[spaceX-1, spaceY], upPuzzle[spaceX, spaceY]
 
         return upPuzzle
 
     def moveSpaceDown(self, spaceX, spaceY):
         downPuzzle = deepcopy(self.puzzle)
-        downPuzzle[spaceX, spaceY], downPuzzle[spaceX+1, spaceY] = downPuzzle[spaceX+1, spaceY], downPuzzle[spaceX, spaceY]
+        downPuzzle[spaceX, spaceY], downPuzzle[spaceX+1,
+                                               spaceY] = downPuzzle[spaceX+1, spaceY], downPuzzle[spaceX, spaceY]
 
         return downPuzzle
 
     def moveSpaceLeft(self, spaceX, spaceY):
         leftPuzzle = deepcopy(self.puzzle)
-        leftPuzzle[spaceX, spaceY], leftPuzzle[spaceX, spaceY-1] = leftPuzzle[spaceX, spaceY-1], leftPuzzle[spaceX, spaceY]
+        leftPuzzle[spaceX, spaceY], leftPuzzle[spaceX, spaceY -
+                                               1] = leftPuzzle[spaceX, spaceY-1], leftPuzzle[spaceX, spaceY]
 
         return leftPuzzle
 
     def moveSpaceRight(self, spaceX, spaceY):
         rightPuzzle = deepcopy(self.puzzle)
-        rightPuzzle[spaceX, spaceY], rightPuzzle[spaceX, spaceY+1] = rightPuzzle[spaceX, spaceY+1], rightPuzzle[spaceX, spaceY]
+        rightPuzzle[spaceX, spaceY], rightPuzzle[spaceX, spaceY +
+                                                 1] = rightPuzzle[spaceX, spaceY+1], rightPuzzle[spaceX, spaceY]
 
         return rightPuzzle
 
     def findEmptySpace(self):
         coord = np.where(self.puzzle == 0)
         return coord[0][0], coord[1][0]
+
+    def printAnswerPath(self, algorithm, output_path):
+        try:
+            makedirs(output_path)
+        except FileExistsError:
+            pass
+
+        with open(output_path+algorithm+'.txt', 'w') as outputFile:
+            node = self
+            while(True):
+                np.savetxt(outputFile, node.puzzle, fmt="%d", delimiter='\t')
+
+                node = node.father
+                if not node:
+                    break
+
+                outputFile.write('\n')

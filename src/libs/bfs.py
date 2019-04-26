@@ -2,12 +2,14 @@ import numpy as np
 
 import libs.stateTree as STTREE
 
+
 class BreadthFirstSearch:
     def __init__(self, initialPuzzle, answerPuzzle):
         self.totalExpansions = 0
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
-        self.frontier.append((STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), 0))
+        self.frontier.append(
+            (STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), 0))
         self.exploredPuzzles = [initialPuzzle.puzzle]
 
     def checkNodeSolution(self, nodePuzzle):
@@ -32,7 +34,7 @@ class BreadthFirstSearch:
             actualNode, actualCost = self.frontier.pop(0)
 
             if self.checkNodeSolution(actualNode.puzzle):
-                return self.totalExpansions, actualCost
+                return actualNode, self.totalExpansions, actualCost
 
             else:
                 actualNode.expand()
