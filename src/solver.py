@@ -1,4 +1,5 @@
 from copy import deepcopy
+from multiprocessing import Process
 
 import numpy as np
 
@@ -12,44 +13,61 @@ import libs.puzzle as PUZZLE
 import libs.state_node as STTREE
 import libs.ucs as UCS
 
+
+def execute(algName, algObject, output_path):
+    print('\nExecuting %s...' % algName)
+    answerNode, exps, cost = algObject.execute()
+    print('\n%s completed.' % algName)
+    answerNode.printAnswerPath(algName, exps, cost, output_path)
+
+
 args = APC.parser()
 
 puzzle = PUZZLE.Puzzle(args.input_file)
 answer = PUZZLE.AnswerPuzzle(puzzle.n)
 
 astar = ASTAR.AStar(deepcopy(puzzle), deepcopy(answer))
-print('\nExecuting A-Star...')
-astarAnswerNode, astarExps, astarCost = astar.execute()
-print('A-Star completed.')
-astarAnswerNode.printAnswerPath('astar', astarExps, astarCost, args.output_path)
+astarProcess = Process(target=execute, args=(
+    'A* Search', astar, args.output_path,))
 
 if not args.a_star_only:
     bfs = BFS.BreadthFirstSearch(deepcopy(puzzle), deepcopy(answer))
-    print('\nExecuting Breadth First Search...')
-    bfsAnswerNode, bfsExps, bfsCost = bfs.execute()
-    print('Breadth First Search completed.')
-    bfsAnswerNode.printAnswerPath('bfs', bfsExps, bfsCost, args.output_path)
+    bfsProcess = Process(target=execute, args=(
+        'Breadth-First Search', bfs, args.output_path,))
 
     ucs = UCS.UniformCostSearch(deepcopy(puzzle), deepcopy(answer))
-    print('\nExecuting Uniform Cost Search...')
-    ucsAnswerNode, ucsExps, ucsCost = ucs.execute()
-    print('Uniform Cost Search completed.')
-    ucsAnswerNode.printAnswerPath('ucs', ucsExps, ucsCost, args.output_path)
+    ucsProcess = Process(target=execute, args=(
+        'Uniform-Cost Search', ucs, args.output_path))
 
     ids = IDS.IterativeDeepeningSearch(deepcopy(puzzle), deepcopy(answer))
-    print('\nExecuting Iterative Deepening Search...')
-    idsAnswerNode, idsExps, idsCost = ids.execute()
-    print('Iterative Deepening Search completed.')
-    idsAnswerNode.printAnswerPath('ids', idsExps, idsCost, args.output_path)
+    idsProcess = Process(target=execute, args=(
+        'Iterative Deepening Search', ids, args.output_path))
 
-    hc = HC.HillClimbing(deepcopy(puzzle), deepcopy(answer), args.k_hill_climbing)
-    print('\nExecuting Hill Climbing...')
-    hcAnswerNode, hcExps, hcCost = hc.execute()
-    print('Hill Climbing completed.')
-    hcAnswerNode.printAnswerPath('hc', hcExps, hcCost, args.output_path)
+    hc = HC.HillClimbing(deepcopy(puzzle), deepcopy(
+        answer), args.k_hill_climbing)
+    hcProcess = Process(target=execute, args=(
+        'Hill Climbing with Lateral Movements Search', hc, args.output_path))
 
     gfs = GFS.GreedyFirstSearch(deepcopy(puzzle), deepcopy(answer))
-    print('\nExecuting Greedy First Search...')
-    gfsAnswerNode, gfsExps, gfsCost = gfs.execute()
-    print('Greedy First Search completed.')
-    gfsAnswerNode.printAnswerPath('gfs', gfsExps, gfsCost, args.output_path)
+    gfsProcess = Process(target=execute, args=(
+        'Greedy Best-First Search', gfs, args.output_path))
+
+# Starts processes
+astarProcess.start()
+
+if not args.a_star_only:
+    bfsProcess.start()
+    ucsProcess.start()
+    idsProcess.start()
+    hcProcess.start()
+    gfsProcess.start()
+
+# Wait processes to join
+astarProcess.join()
+
+if not args.a_star_only:
+    bfsProcess.join()
+    ucsProcess.join()
+    idsProcess.join()
+    hcProcess.join()
+    gfsProcess.join()

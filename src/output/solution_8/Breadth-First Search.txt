@@ -1,5 +1,5 @@
-***ids statistics***
-Total node expansions: 3418
+---Breadth-First Search statistics---
+Total node expansions: 154
 Total solution cost: 8
 Solution path:
 

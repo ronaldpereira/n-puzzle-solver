@@ -1,5 +1,5 @@
-***ids statistics***
-Total node expansions: 331
+---Greedy Best-First Search statistics---
+Total node expansions: 5
 Total solution cost: 5
 Solution path:
 

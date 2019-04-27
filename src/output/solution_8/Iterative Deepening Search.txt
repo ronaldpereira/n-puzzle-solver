@@ -1,5 +1,5 @@
-***bfs statistics***
-Total node expansions: 154
+---Iterative Deepening Search statistics---
+Total node expansions: 3418
 Total solution cost: 8
 Solution path:
 

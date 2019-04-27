@@ -1,4 +1,4 @@
-***astar statistics***
+---A* Search statistics---
 Total node expansions: 8
 Total solution cost: 8
 Solution path:

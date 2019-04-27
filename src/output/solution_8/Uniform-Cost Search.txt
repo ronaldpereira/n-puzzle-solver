@@ -1,4 +1,4 @@
-***ucs statistics***
+---Uniform-Cost Search statistics---
 Total node expansions: 154
 Total solution cost: 8
 Solution path:

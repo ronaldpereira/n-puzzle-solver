@@ -1,4 +1,4 @@
-***ucs statistics***
+---Breadth-First Search statistics---
 Total node expansions: 51
 Total solution cost: 5
 Solution path:

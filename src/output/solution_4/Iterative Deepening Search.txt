@@ -1,5 +1,5 @@
-***hc statistics***
-Total node expansions: 5
+---Iterative Deepening Search statistics---
+Total node expansions: 331
 Total solution cost: 5
 Solution path:
 

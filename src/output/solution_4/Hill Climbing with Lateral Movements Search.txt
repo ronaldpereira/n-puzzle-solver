@@ -1,4 +1,4 @@
-***astar statistics***
+---Hill Climbing with Lateral Movements Search statistics---
 Total node expansions: 5
 Total solution cost: 5
 Solution path:

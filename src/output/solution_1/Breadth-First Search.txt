@@ -1,5 +1,5 @@
-***gfs statistics***
-Total node expansions: 1
+---Breadth-First Search statistics---
+Total node expansions: 3
 Total solution cost: 1
 Solution path:
 

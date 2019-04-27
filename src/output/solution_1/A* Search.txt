@@ -1,5 +1,5 @@
-***bfs statistics***
-Total node expansions: 3
+---A* Search statistics---
+Total node expansions: 1
 Total solution cost: 1
 Solution path:
 

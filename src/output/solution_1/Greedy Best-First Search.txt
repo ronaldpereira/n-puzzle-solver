@@ -1,5 +1,5 @@
-***ucs statistics***
-Total node expansions: 3
+---Greedy Best-First Search statistics---
+Total node expansions: 1
 Total solution cost: 1
 Solution path:
 

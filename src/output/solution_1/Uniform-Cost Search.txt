@@ -1,5 +1,5 @@
-***ids statistics***
-Total node expansions: 4
+---Uniform-Cost Search statistics---
+Total node expansions: 3
 Total solution cost: 1
 Solution path:
 

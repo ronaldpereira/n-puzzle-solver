@@ -1,4 +1,4 @@
-***gfs statistics***
+---A* Search statistics---
 Total node expansions: 5
 Total solution cost: 5
 Solution path:

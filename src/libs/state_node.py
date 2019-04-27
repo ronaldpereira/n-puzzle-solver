@@ -72,7 +72,7 @@ class StateNode:
             pass
 
         with open(output_path+algorithm+'.txt', 'w') as outputFile:
-            outputFile.write("***%s statistics***\nTotal node expansions: %d\nTotal solution cost: %d\n" %
+            outputFile.write("---%s statistics---\nTotal node expansions: %d\nTotal solution cost: %d\n" %
                              (algorithm, expansions, cost))
             outputFile.write('Solution path:\n')
 
