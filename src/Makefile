@@ -19,8 +19,6 @@ testsolution:
 
 	python3 solver.py input/solution_31.txt -o output/solution_31/ -a
 
-nphard: nphardgenerator nphardsolver
-
 nphardsolver:
 	python3 solver.py input/15_puzzle_solution_20.txt -o output/15_puzzle_solution_20/ -a
 
