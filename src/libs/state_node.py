@@ -65,15 +65,17 @@ class StateNode:
         coord = np.where(self.puzzle == 0)
         return coord[0][0], coord[1][0]
 
-    def printAnswerPath(self, algorithm, expansions, cost, output_path):
+    def printAnswerPath(self, algorithm, expansions, cost, elapsed, output_path):
         try:
             makedirs(output_path)
         except FileExistsError:
             pass
 
         with open(output_path+algorithm+'.txt', 'w') as outputFile:
-            outputFile.write("---%s statistics---\nTotal node expansions: %d\nTotal solution cost: %d\n" %
-                             (algorithm, expansions, cost))
+            outputFile.write("--- %s statistics ---\n" %algorithm)
+            outputFile.write("Total node expansions: %d\n" %expansions)
+            outputFile.write("Total solution cost: %d\n" %cost)
+            outputFile.write("Time elapsed executing: %.3fs\n" %elapsed)
             outputFile.write('Solution path:\n')
 
             puzzles = []

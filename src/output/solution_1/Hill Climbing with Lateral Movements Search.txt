@@ -1,6 +1,7 @@
----Hill Climbing with Lateral Movements Search statistics---
+--- Hill Climbing with Lateral Movements Search statistics ---
 Total node expansions: 1
 Total solution cost: 1
+Time elapsed executing: 0.001s
 Solution path:
 
 Step #0

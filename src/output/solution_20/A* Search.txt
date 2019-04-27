@@ -1,6 +1,7 @@
----A* Search statistics---
+--- A* Search statistics ---
 Total node expansions: 218
 Total solution cost: 20
+Time elapsed executing: 0.256s
 Solution path:
 
 Step #0

@@ -1,3 +1,4 @@
+import time
 from copy import deepcopy
 from multiprocessing import Process
 
@@ -15,10 +16,12 @@ import libs.ucs as UCS
 
 
 def execute(algName, algObject, output_path):
+    start = time.time()
     print('\nExecuting %s...' % algName)
     answerNode, exps, cost = algObject.execute()
     print('\n%s completed.' % algName)
-    answerNode.printAnswerPath(algName, exps, cost, output_path)
+    end = time.time()
+    answerNode.printAnswerPath(algName, exps, cost, end-start, output_path)
 
 
 args = APC.parser()

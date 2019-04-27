@@ -1,6 +1,7 @@
----Iterative Deepening Search statistics---
+--- Iterative Deepening Search statistics ---
 Total node expansions: 331
 Total solution cost: 5
+Time elapsed executing: 0.014s
 Solution path:
 
 Step #0

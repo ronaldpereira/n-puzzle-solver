@@ -10,12 +10,12 @@ class HillClimbing:
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
         self.frontier.append((STTREE.StateNode(
-            initialPuzzle.puzzle, initialPuzzle.n), self.hammingPriority(initialPuzzle.puzzle), 0))
+            initialPuzzle.puzzle, initialPuzzle.n), self.manhattanDistance(initialPuzzle.puzzle), 0))
         self.path = []
 
-    def hammingPriority(self, actualPuzzle):
-        # Calculates the number of pieces in the wrong position
-        totalWrong = 0
+    def manhattanDistance(self, actualPuzzle):
+        # Calculates the Manhattan Distance: sum of the distances of each piece to it's correct position
+        totalDist = 0
         actualPiece = 1
         for x in range(len(actualPuzzle)):
             for y in range(len(actualPuzzle[x])):
@@ -23,13 +23,11 @@ class HillClimbing:
                     actualCoord = np.where(actualPuzzle == actualPiece)
                     coordX, coordY = actualCoord[0][0], actualCoord[1][0]
 
-                    # Piece is in the wrong spot
-                    if abs(x-coordX) != 0 or abs(y-coordY) != 0:
-                        totalWrong += 1
+                    totalDist += abs(x-coordX) + abs(y-coordY)
 
                     actualPiece += 1
 
-        return totalWrong
+        return totalDist
 
     def checkNodeSolution(self, nodePuzzle):
         return np.array_equal(nodePuzzle, self.answerPuzzle)
@@ -38,7 +36,7 @@ class HillClimbing:
         # If the node action exists
         if node:
             self.frontier.append(
-                (node, self.hammingPriority(node.puzzle), actualCost+1))
+                (node, self.manhattanDistance(node.puzzle), actualCost+1))
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])
