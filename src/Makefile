@@ -20,15 +20,15 @@ test:
 	python3 generator.py input/15_puzzle_solution_20.txt -n 4 -c 20
 	python3 solver.py input/15_puzzle_solution_20.txt -o output/15_puzzle_solution20/ -a
 
-	python3 generator.py input/15_puzzle_solution_20.txt -n 4 -c 20
+	python3 generator.py input/15_puzzle_solution_20.txt -n 5 -c 20
 	python3 solver.py input/15_puzzle_solution_20.txt -o output/15_puzzle_solution20/ -a
 
-	python3 generator.py input/24_puzzle_solution_25.txt -n 5 -c 25
+	python3 generator.py input/24_puzzle_solution_25.txt -n 6 -c 20
 	python3 solver.py input/24_puzzle_solution_25.txt -o output/24_puzzle_solution25/ -a
 
 	# This last three tests takes longer than the average even for the astar algorithm only
 
-	python3 generator.py input/143_puzzle_solution_40.txt -n 12 -c 40
+	python3 generator.py input/143_puzzle_solution_40.txt -n 12 -c 20
 	python3 solver.py input/143_puzzle_solution_40.txt -o output/143_puzzle_solution40/ -a
 
 	python3 solver.py input/solution_31.txt -o output/solution_31/ -a
