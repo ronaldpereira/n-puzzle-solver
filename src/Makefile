@@ -1,7 +1,7 @@
 test:
 	python3 solver.py input/solution_1.txt -o output/solution_1/
 
-	python3 solver.py input/solution_4.txt -o output/solution_4/
+	python3 solver.py input/solution_5.txt -o output/solution_5/
 
 	python3 solver.py input/solution_8.txt -o output/solution_8/ -k 30
 
