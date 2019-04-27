@@ -1,6 +1,6 @@
 # n-Puzzle Solver
 
-n-Puzzle solver using Artificial Intelligence algorithms:
+n-Puzzle solver using parallel Artificial Intelligence algorithms:
 
 - No-information search:
   - BFS (Breadth-First Search)
