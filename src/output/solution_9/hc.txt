@@ -1,0 +1,54 @@
+***hc statistics***
+Total node expansions: 34
+Total solution cost: 9
+Solution path:
+
+Step #0
+1	0	2
+8	5	3
+4	7	6
+
+Step #1
+1	2	0
+8	5	3
+4	7	6
+
+Step #2
+1	2	3
+8	5	0
+4	7	6
+
+Step #3
+1	2	3
+8	5	6
+4	7	0
+
+Step #4
+1	2	3
+8	5	6
+4	0	7
+
+Step #5
+1	2	3
+8	5	6
+4	7	0
+
+Step #6
+1	2	3
+8	5	6
+4	0	7
+
+Step #7
+1	2	3
+8	5	6
+0	4	7
+
+Step #8
+1	2	3
+8	5	6
+4	0	7
+
+Step #9
+1	2	3
+8	5	6
+4	7	0
