@@ -5,11 +5,11 @@ test:
 
 	python3 solver.py input/solution_8.txt -o output/solution_8/ -k 30
 
-	python3 solver.py input/solution_9.txt -o output/solution_9/ -k 30
-
-	python3 solver.py input/solution_10.txt -o output/solution_10/ -k 40
-
 	# From here on, just a-star algorithm solves in an acceptable time
+
+	python3 solver.py input/solution_9.txt -o output/solution_9/ -a
+
+	python3 solver.py input/solution_10.txt -o output/solution_10/ -a
 
 	python3 solver.py input/solution_15.txt -o output/solution_15/ -a
 
@@ -26,7 +26,7 @@ test:
 	python3 generator.py input/24_puzzle_solution_25.txt -n 5 -c 25
 	python3 solver.py input/24_puzzle_solution_25.txt -o output/24_puzzle_solution25/ -a
 
-	# This last two tests takes longer than the average
+	# This last three tests takes longer than the average even for the astar algorithm only
 
 	python3 generator.py input/143_puzzle_solution_40.txt -n 12 -c 40
 	python3 solver.py input/143_puzzle_solution_40.txt -o output/143_puzzle_solution40/ -a
