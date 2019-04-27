@@ -5,7 +5,7 @@ test:
 
 	python3 solver.py input/solution_8.txt -o output/solution_8/
 
-	# From here on, just a-star algorithm solves in a acceptable time
+	# From here on, just a-star algorithm solves in an acceptable time
 
 	python3 solver.py input/solution_9.txt -o output/solution_9/ -a
 
