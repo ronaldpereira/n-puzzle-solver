@@ -5,7 +5,7 @@ You can check the `Makefile` commands to get a quickly overview of how to execut
 ## Arguments for solver
 
 ```text
-usage: solver.py [-h] [-o OUTPUT_PATH] [-a] input_file
+usage: solver.py [-h] [-o OUTPUT_PATH] [-a] [-k K_HILL_CLIMBING] input_file
 
 n-puzzle solver using several Artificial Intelligence algorithms.
 
@@ -18,6 +18,9 @@ optional arguments:
                         Output folder path. (Default:"./output/")
   -a, --a_star_only     Use only a-star algorithm. Recommended for n-puzzles,
                         n > 3. (Default: False)
+  -k K_HILL_CLIMBING, --k_hill_climbing K_HILL_CLIMBING
+                        Number of maximum k lateral movements to Hill Climbing
+                        algorithm. (Default: 20)
 ```
 
 ## Arguments for generator

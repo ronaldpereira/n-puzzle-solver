@@ -10,12 +10,12 @@ class HillClimbing:
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
         self.frontier.append((STTREE.StateTree(
-            initialPuzzle.puzzle, initialPuzzle.n), self.manhattanDistance(initialPuzzle.puzzle), 0))
+            initialPuzzle.puzzle, initialPuzzle.n), self.hammingPriority(initialPuzzle.puzzle), 0))
         self.path = []
 
-    def manhattanDistance(self, actualPuzzle):
-        # Calculates the Manhattan Distance: sum of the distances of each piece to it's correct position
-        totalDist = 0
+    def hammingPriority(self, actualPuzzle):
+        # Calculates the number of pieces in the wrong position
+        totalWrong = 0
         actualPiece = 1
         for x in range(len(actualPuzzle)):
             for y in range(len(actualPuzzle[x])):
@@ -23,11 +23,13 @@ class HillClimbing:
                     actualCoord = np.where(actualPuzzle == actualPiece)
                     coordX, coordY = actualCoord[0][0], actualCoord[1][0]
 
-                    totalDist += abs(x-coordX) + abs(y-coordY)
+                    # Piece is in the wrong spot
+                    if abs(x-coordX) != 0 or abs(y-coordY) != 0:
+                        totalWrong += 1
 
                     actualPiece += 1
 
-        return totalDist
+        return totalWrong
 
     def checkNodeSolution(self, nodePuzzle):
         return np.array_equal(nodePuzzle, self.answerPuzzle)
@@ -36,7 +38,7 @@ class HillClimbing:
         # If the node action exists
         if node:
             self.frontier.append(
-                (node, self.manhattanDistance(node.puzzle), actualCost+1))
+                (node, self.hammingPriority(node.puzzle), actualCost+1))
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])
@@ -55,16 +57,20 @@ class HillClimbing:
                 actualNode, actualDistance, actualCost = newNode, newDistance, newCost
                 self.path.append(actualNode.puzzle)
 
-            else:
+            elif newDistance == actualDistance:
                 # If the remaining lateral movements is greater than 0, move laterally and decrease k by 1
                 if k > 0:
                     k -= 1
                     actualNode, actualDistance, actualCost = newNode, newDistance, newCost
                     self.path.append(actualNode.puzzle)
 
-                # If the remaining lateral movements is 0, return None answer
+                # If the remaining lateral movements is 0, return the actual node
                 else:
-                    return None
+                    return actualNode, self.totalExpansions, actualCost
+            
+            # If no frontier node is better than then actual one, finish the Hill Climbing and return the actual node
+            else:
+                return actualNode, self.totalExpansions, actualCost
 
             if self.checkNodeSolution(actualNode.puzzle):
                 return actualNode, self.totalExpansions, actualCost
@@ -78,5 +84,5 @@ class HillClimbing:
                 self.insertNodeToFrontier(actualNode.left, actualCost)
                 self.insertNodeToFrontier(actualNode.right, actualCost)
 
-        # If, for some reason, the problem doesn't have a solution, then return None as an answer
-        return None
+        # If, for some reason, the solver doesn't found a solution, then return the last actual node as an answer
+        return actualNode, self.totalExpansions, actualCost

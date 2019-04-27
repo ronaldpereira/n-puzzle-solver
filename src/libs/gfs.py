@@ -9,9 +9,9 @@ class GreedyFirstSearch:
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
         self.frontier.append((STTREE.StateTree(
-            initialPuzzle.puzzle, initialPuzzle.n), self.numberOfWrongPieces(initialPuzzle.puzzle), 0))
+            initialPuzzle.puzzle, initialPuzzle.n), self.hammingPriority(initialPuzzle.puzzle), 0))
 
-    def numberOfWrongPieces(self, actualPuzzle):
+    def hammingPriority(self, actualPuzzle):
         # Calculates the number of pieces in the wrong position
         totalWrong = 0
         actualPiece = 1
@@ -36,7 +36,7 @@ class GreedyFirstSearch:
         # If the node action exists
         if node:
             self.frontier.append(
-                (node, self.numberOfWrongPieces(node.puzzle), actualCost+1))
+                (node, actualCost + 1 + self.hammingPriority(node.puzzle), actualCost+1))
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])

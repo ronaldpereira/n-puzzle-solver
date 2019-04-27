@@ -3,13 +3,13 @@ test:
 
 	python3 solver.py input/solution_4.txt -o output/solution_4/
 
-	python3 solver.py input/solution_8.txt -o output/solution_8/
+	python3 solver.py input/solution_8.txt -o output/solution_8/ -k 30
+
+	python3 solver.py input/solution_9.txt -o output/solution_9/ -k 30
+
+	python3 solver.py input/solution_10.txt -o output/solution_10/ -k 40
 
 	# From here on, just a-star algorithm solves in an acceptable time
-
-	python3 solver.py input/solution_9.txt -o output/solution_9/ -a
-
-	python3 solver.py input/solution_10.txt -o output/solution_10/ -a
 
 	python3 solver.py input/solution_15.txt -o output/solution_15/ -a
 

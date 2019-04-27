@@ -42,7 +42,7 @@ if not args.a_star_only:
     print('Iterative Deepening Search completed.')
     idsAnswerNode.printAnswerPath('ids', idsExps, idsCost, args.output_path)
 
-    hc = HC.HillClimbing(deepcopy(puzzle), deepcopy(answer), 10)
+    hc = HC.HillClimbing(deepcopy(puzzle), deepcopy(answer), args.k_hill_climbing)
     print('\nExecuting Hill Climbing...')
     hcAnswerNode, hcExps, hcCost = hc.execute()
     print('Hill Climbing completed.')
