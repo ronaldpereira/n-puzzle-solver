@@ -1,5 +1,7 @@
 # Execution guidelines
 
+You can check the `Makefile` commands to get a quickly overview of how to execute this solver/generator, as it executes sequencially a lot of tests.
+
 ## Arguments for solver
 
 ```text
