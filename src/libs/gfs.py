@@ -36,7 +36,7 @@ class GreedyFirstSearch:
         # If the node action exists
         if node:
             self.frontier.append(
-                (node, actualCost + 1 + self.hammingPriority(node.puzzle), actualCost+1))
+                (node, self.hammingPriority(node.puzzle), actualCost+1))
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])

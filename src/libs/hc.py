@@ -67,7 +67,7 @@ class HillClimbing:
                 # If the remaining lateral movements is 0, return the actual node
                 else:
                     return actualNode, self.totalExpansions, actualCost
-            
+
             # If no frontier node is better than then actual one, finish the Hill Climbing and return the actual node
             else:
                 return actualNode, self.totalExpansions, actualCost
@@ -78,7 +78,9 @@ class HillClimbing:
             else:
                 actualNode.expand()
                 self.totalExpansions += 1
-
+                
+                # Clears the frontier to insert the new nodes
+                self.frontier.clear()
                 self.insertNodeToFrontier(actualNode.up, actualCost)
                 self.insertNodeToFrontier(actualNode.down, actualCost)
                 self.insertNodeToFrontier(actualNode.left, actualCost)
