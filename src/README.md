@@ -59,6 +59,7 @@ optional arguments:
     3. Total solution cost
     4. Sequence of solution path found
 - Output Example for a 8-puzzle (3x3 board):
+
 ```text
 ***astar statistics***
 Total node expansions: 8
