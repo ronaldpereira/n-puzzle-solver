@@ -1,7 +1,7 @@
 --- Uniform-Cost Search statistics ---
 Total node expansions: 154
 Total solution cost: 8
-Time elapsed executing: 0.237s
+Time elapsed executing: 0.258s
 Solution path:
 
 Step #0

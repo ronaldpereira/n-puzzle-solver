@@ -1,7 +1,7 @@
 --- Breadth-First Search statistics ---
 Total node expansions: 51
 Total solution cost: 5
-Time elapsed executing: 0.020s
+Time elapsed executing: 0.025s
 Solution path:
 
 Step #0

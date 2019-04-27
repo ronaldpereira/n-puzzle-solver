@@ -1,7 +1,7 @@
 --- Greedy Best-First Search statistics ---
 Total node expansions: 8
 Total solution cost: 8
-Time elapsed executing: 0.002s
+Time elapsed executing: 0.001s
 Solution path:
 
 Step #0
