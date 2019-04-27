@@ -1,6 +1,6 @@
 import numpy as np
 
-import libs.stateTree as STTREE
+import libs.state_node as STTREE
 
 
 class GreedyFirstSearch:
@@ -8,7 +8,7 @@ class GreedyFirstSearch:
         self.totalExpansions = 0
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
-        self.frontier.append((STTREE.StateTree(
+        self.frontier.append((STTREE.StateNode(
             initialPuzzle.puzzle, initialPuzzle.n), self.hammingPriority(initialPuzzle.puzzle), 0))
 
     def hammingPriority(self, actualPuzzle):

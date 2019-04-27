@@ -1,6 +1,6 @@
 import numpy as np
 
-import libs.stateTree as STTREE
+import libs.state_node as STTREE
 
 
 class BreadthFirstSearch:
@@ -9,7 +9,7 @@ class BreadthFirstSearch:
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
         self.frontier.append(
-            (STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), 0))
+            (STTREE.StateNode(initialPuzzle.puzzle, initialPuzzle.n), 0))
         self.exploredPuzzles = [initialPuzzle.puzzle]
 
     def checkNodeSolution(self, nodePuzzle):

@@ -4,7 +4,7 @@ from os import makedirs
 import numpy as np
 
 
-class StateTree:
+class StateNode:
     def __init__(self, puzzle, n, father=None):
         self.n = n
         self.puzzle = puzzle
@@ -19,19 +19,19 @@ class StateTree:
 
         if spaceX > 0:
             upPuzzle = self.moveSpaceUp(spaceX, spaceY)
-            self.up = StateTree(upPuzzle, self.n, self)
+            self.up = StateNode(upPuzzle, self.n, self)
 
         if spaceX < self.n-1:
             downPuzzle = self.moveSpaceDown(spaceX, spaceY)
-            self.down = StateTree(downPuzzle, self.n, self)
+            self.down = StateNode(downPuzzle, self.n, self)
 
         if spaceY > 0:
             leftPuzzle = self.moveSpaceLeft(spaceX, spaceY)
-            self.left = StateTree(leftPuzzle, self.n, self)
+            self.left = StateNode(leftPuzzle, self.n, self)
 
         if spaceY < self.n-1:
             rightPuzzle = self.moveSpaceRight(spaceX, spaceY)
-            self.right = StateTree(rightPuzzle, self.n, self)
+            self.right = StateNode(rightPuzzle, self.n, self)
 
     def moveSpaceUp(self, spaceX, spaceY):
         upPuzzle = deepcopy(self.puzzle)

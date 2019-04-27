@@ -2,7 +2,7 @@ from copy import deepcopy
 
 import numpy as np
 
-import libs.stateTree as STTREE
+import libs.state_node as STTREE
 
 
 class IterativeDeepeningSearch:
@@ -12,7 +12,7 @@ class IterativeDeepeningSearch:
         self.answerPuzzle = answerPuzzle
         self.frontier = []
         self.frontier.append(
-            (STTREE.StateTree(initialPuzzle.puzzle, initialPuzzle.n), 0, 0))
+            (STTREE.StateNode(initialPuzzle.puzzle, initialPuzzle.n), 0, 0))
 
     def checkNodeSolution(self, nodePuzzle):
         return np.array_equal(nodePuzzle, self.answerPuzzle.puzzle)

@@ -9,7 +9,7 @@ import libs.gfs as GFS
 import libs.hc as HC
 import libs.ids as IDS
 import libs.puzzle as PUZZLE
-import libs.stateTree as STTREE
+import libs.state_node as STTREE
 import libs.ucs as UCS
 
 args = APC.parser()
