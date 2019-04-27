@@ -16,41 +16,6 @@ n-Puzzle solver using Artificial Intelligence algorithms:
 
 Also contains a n-Puzzle generator to generate solvable puzzles.
 
-## Arguments for solver
+## Execution
 
-```text
-usage: solver.py [-h] [-o OUTPUT_PATH] [-a] input_file
-
-n-puzzle solver using several Artificial Intelligence algorithms.
-
-positional arguments:
-  input_file            Input file path.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -o OUTPUT_PATH, --output_path OUTPUT_PATH
-                        Output folder path. (Default:"./output/")
-  -a, --a_star_only     Use only a-star algorithm. Recommended for n-puzzles,
-                        n > 3. (Default: False)
-```
-
-## Arguments for generator
-
-```text
-usage: generator.py [-h] [-n N_DIM] [-c APPROX_COST] output_file
-
-Solvable n-puzzle's generator.
-
-positional arguments:
-  output_file           Output file name.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -n N_DIM, --n_dim N_DIM
-                        n-Puzzle dimension (n X n). (Default: 3)
-  -c APPROX_COST, --approx_cost APPROX_COST
-                        Approximated optimal solution cost. This must be an
-                        approximation because we can't guarantee the path
-                        followed by the empty space won't be an cycle.
-                        (Default: 1)
-```
+Check the file "src/README.md" for more information about execution guidelines.
