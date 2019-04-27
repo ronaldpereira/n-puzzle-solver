@@ -26,6 +26,8 @@ test:
 	python3 generator.py input/24_puzzle_solution_25.txt -n 5 -c 25
 	python3 solver.py input/24_puzzle_solution_25.txt -o output/24_puzzle_solution25/ -a
 
+	# This last two tests takes longer than the average
+
 	python3 generator.py input/143_puzzle_solution_40.txt -n 12 -c 40
 	python3 solver.py input/143_puzzle_solution_40.txt -o output/143_puzzle_solution40/ -a
 
