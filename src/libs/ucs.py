@@ -9,7 +9,8 @@ class UniformCostSearch:
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
         self.frontier.append(
-            (STTREE.StateNode(initialPuzzle.puzzle, initialPuzzle.n), 0))
+            (STTREE.StateNode(initialPuzzle.puzzle, initialPuzzle.n), 0)
+        )
         self.exploredPuzzles = [initialPuzzle.puzzle]
 
     def checkNodeSolution(self, nodePuzzle):
@@ -29,16 +30,15 @@ class UniformCostSearch:
     def insertNodeToFrontier(self, node, actualCost):
         # If the node action exists and it's not already included in the tree
         if node:
-            isInserted, frontierIndex = self.isPuzzleAlreadyInserted(
-                node.puzzle)
+            isInserted, frontierIndex = self.isPuzzleAlreadyInserted(node.puzzle)
             if not isInserted:
-                self.frontier.append((node, actualCost+1))
+                self.frontier.append((node, actualCost + 1))
                 self.exploredPuzzles.append(node.puzzle)
 
             else:
                 if frontierIndex:
                     if actualCost < self.frontier[frontierIndex][1]:
-                        self.frontier[frontierIndex] = (node, actualCost+1)
+                        self.frontier[frontierIndex] = (node, actualCost + 1)
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])

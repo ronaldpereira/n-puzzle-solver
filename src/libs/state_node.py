@@ -21,7 +21,7 @@ class StateNode:
             upPuzzle = self.moveSpaceUp(spaceX, spaceY)
             self.up = StateNode(upPuzzle, self.n, self)
 
-        if spaceX < self.n-1:
+        if spaceX < self.n - 1:
             downPuzzle = self.moveSpaceDown(spaceX, spaceY)
             self.down = StateNode(downPuzzle, self.n, self)
 
@@ -29,35 +29,43 @@ class StateNode:
             leftPuzzle = self.moveSpaceLeft(spaceX, spaceY)
             self.left = StateNode(leftPuzzle, self.n, self)
 
-        if spaceY < self.n-1:
+        if spaceY < self.n - 1:
             rightPuzzle = self.moveSpaceRight(spaceX, spaceY)
             self.right = StateNode(rightPuzzle, self.n, self)
 
     def moveSpaceUp(self, spaceX, spaceY):
         upPuzzle = deepcopy(self.puzzle)
-        upPuzzle[spaceX, spaceY], upPuzzle[spaceX-1,
-                                           spaceY] = upPuzzle[spaceX-1, spaceY], upPuzzle[spaceX, spaceY]
+        upPuzzle[spaceX, spaceY], upPuzzle[spaceX - 1, spaceY] = (
+            upPuzzle[spaceX - 1, spaceY],
+            upPuzzle[spaceX, spaceY],
+        )
 
         return upPuzzle
 
     def moveSpaceDown(self, spaceX, spaceY):
         downPuzzle = deepcopy(self.puzzle)
-        downPuzzle[spaceX, spaceY], downPuzzle[spaceX+1,
-                                               spaceY] = downPuzzle[spaceX+1, spaceY], downPuzzle[spaceX, spaceY]
+        downPuzzle[spaceX, spaceY], downPuzzle[spaceX + 1, spaceY] = (
+            downPuzzle[spaceX + 1, spaceY],
+            downPuzzle[spaceX, spaceY],
+        )
 
         return downPuzzle
 
     def moveSpaceLeft(self, spaceX, spaceY):
         leftPuzzle = deepcopy(self.puzzle)
-        leftPuzzle[spaceX, spaceY], leftPuzzle[spaceX, spaceY -
-                                               1] = leftPuzzle[spaceX, spaceY-1], leftPuzzle[spaceX, spaceY]
+        leftPuzzle[spaceX, spaceY], leftPuzzle[spaceX, spaceY - 1] = (
+            leftPuzzle[spaceX, spaceY - 1],
+            leftPuzzle[spaceX, spaceY],
+        )
 
         return leftPuzzle
 
     def moveSpaceRight(self, spaceX, spaceY):
         rightPuzzle = deepcopy(self.puzzle)
-        rightPuzzle[spaceX, spaceY], rightPuzzle[spaceX, spaceY +
-                                                 1] = rightPuzzle[spaceX, spaceY+1], rightPuzzle[spaceX, spaceY]
+        rightPuzzle[spaceX, spaceY], rightPuzzle[spaceX, spaceY + 1] = (
+            rightPuzzle[spaceX, spaceY + 1],
+            rightPuzzle[spaceX, spaceY],
+        )
 
         return rightPuzzle
 
@@ -71,19 +79,19 @@ class StateNode:
         except FileExistsError:
             pass
 
-        with open(output_path+algorithm+'.txt', 'w') as outputFile:
-            outputFile.write("--- %s statistics ---\n" %algorithm)
-            outputFile.write("Total node expansions: %d\n" %expansions)
-            outputFile.write("Total solution cost: %d\n" %cost)
-            outputFile.write("Time elapsed executing: %.3fs\n" %elapsed)
-            outputFile.write('Solution path:\n')
+        with open(output_path + algorithm + ".txt", "w") as outputFile:
+            outputFile.write("--- %s statistics ---\n" % algorithm)
+            outputFile.write("Total node expansions: %d\n" % expansions)
+            outputFile.write("Total solution cost: %d\n" % cost)
+            outputFile.write("Time elapsed executing: %.3fs\n" % elapsed)
+            outputFile.write("Solution path:\n")
 
             puzzles = []
             node = self
-            while(node):
+            while node:
                 puzzles.append(node.puzzle)
                 node = node.father
 
             for i in reversed(range(len(puzzles))):
-                outputFile.write('\nStep #%d\n' %(len(puzzles) - i - 1))
-                np.savetxt(outputFile, puzzles[i], fmt="%d", delimiter='\t')
+                outputFile.write("\nStep #%d\n" % (len(puzzles) - i - 1))
+                np.savetxt(outputFile, puzzles[i], fmt="%d", delimiter="\t")

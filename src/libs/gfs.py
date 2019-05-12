@@ -8,8 +8,13 @@ class GreedyFirstSearch:
         self.totalExpansions = 0
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
-        self.frontier.append((STTREE.StateNode(
-            initialPuzzle.puzzle, initialPuzzle.n), self.hammingPriority(initialPuzzle.puzzle), 0))
+        self.frontier.append(
+            (
+                STTREE.StateNode(initialPuzzle.puzzle, initialPuzzle.n),
+                self.hammingPriority(initialPuzzle.puzzle),
+                0,
+            )
+        )
 
     def hammingPriority(self, actualPuzzle):
         # Calculates the number of pieces in the wrong position
@@ -17,12 +22,12 @@ class GreedyFirstSearch:
         actualPiece = 1
         for x in range(len(actualPuzzle)):
             for y in range(len(actualPuzzle[x])):
-                if not (x == len(actualPuzzle)-1 and y == len(actualPuzzle[x])-1):
+                if not (x == len(actualPuzzle) - 1 and y == len(actualPuzzle[x]) - 1):
                     actualCoord = np.where(actualPuzzle == actualPiece)
                     coordX, coordY = actualCoord[0][0], actualCoord[1][0]
 
                     # Piece is in the wrong spot
-                    if abs(x-coordX) != 0 or abs(y-coordY) != 0:
+                    if abs(x - coordX) != 0 or abs(y - coordY) != 0:
                         totalWrong += 1
 
                     actualPiece += 1
@@ -36,7 +41,8 @@ class GreedyFirstSearch:
         # If the node action exists
         if node:
             self.frontier.append(
-                (node, self.hammingPriority(node.puzzle), actualCost+1))
+                (node, self.hammingPriority(node.puzzle), actualCost + 1)
+            )
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])

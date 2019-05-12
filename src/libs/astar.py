@@ -8,8 +8,13 @@ class AStar:
         self.totalExpansions = 0
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
-        self.frontier.append((STTREE.StateNode(
-            initialPuzzle.puzzle, initialPuzzle.n), self.manhattanDistance(initialPuzzle.puzzle), 0))
+        self.frontier.append(
+            (
+                STTREE.StateNode(initialPuzzle.puzzle, initialPuzzle.n),
+                self.manhattanDistance(initialPuzzle.puzzle),
+                0,
+            )
+        )
 
     def manhattanDistance(self, actualPuzzle):
         # Calculates the Manhattan Distance: sum of the distances of each piece to it's correct position
@@ -17,11 +22,11 @@ class AStar:
         actualPiece = 1
         for x in range(len(actualPuzzle)):
             for y in range(len(actualPuzzle[x])):
-                if not (x == len(actualPuzzle)-1 and y == len(actualPuzzle[x])-1):
+                if not (x == len(actualPuzzle) - 1 and y == len(actualPuzzle[x]) - 1):
                     actualCoord = np.where(actualPuzzle == actualPiece)
                     coordX, coordY = actualCoord[0][0], actualCoord[1][0]
 
-                    totalDist += abs(x-coordX) + abs(y-coordY)
+                    totalDist += abs(x - coordX) + abs(y - coordY)
 
                     actualPiece += 1
 
@@ -40,16 +45,26 @@ class AStar:
     def insertNodeToFrontier(self, node, actualCost):
         # If the node action exists and it's not already included in the tree
         if node:
-            isInserted, insertedIndex = self.isPuzzleAlreadyInserted(
-                node.puzzle)
+            isInserted, insertedIndex = self.isPuzzleAlreadyInserted(node.puzzle)
             if not isInserted:
                 self.frontier.append(
-                    (node, actualCost + 1 + self.manhattanDistance(node.puzzle), actualCost+1))
+                    (
+                        node,
+                        actualCost + 1 + self.manhattanDistance(node.puzzle),
+                        actualCost + 1,
+                    )
+                )
             # If the node is already inserted, pick the lesser cost one to stay in frontier
             else:
-                if actualCost + 1 + self.manhattanDistance(node.puzzle) < self.frontier[insertedIndex][1]:
+                if (
+                    actualCost + 1 + self.manhattanDistance(node.puzzle)
+                    < self.frontier[insertedIndex][1]
+                ):
                     self.frontier[insertedIndex] = (
-                        node, actualCost + 1 + self.manhattanDistance(node.puzzle), actualCost+1)
+                        node,
+                        actualCost + 1 + self.manhattanDistance(node.puzzle),
+                        actualCost + 1,
+                    )
 
     def sortFrontier(self):
         self.frontier = sorted(self.frontier, key=lambda x: x[1])

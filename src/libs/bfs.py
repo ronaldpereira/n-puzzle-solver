@@ -9,7 +9,8 @@ class BreadthFirstSearch:
         self.answerPuzzle = answerPuzzle.puzzle
         self.frontier = []
         self.frontier.append(
-            (STTREE.StateNode(initialPuzzle.puzzle, initialPuzzle.n), 0))
+            (STTREE.StateNode(initialPuzzle.puzzle, initialPuzzle.n), 0)
+        )
         self.exploredPuzzles = [initialPuzzle.puzzle]
 
     def checkNodeSolution(self, nodePuzzle):
@@ -26,7 +27,7 @@ class BreadthFirstSearch:
         # If the node action exists and it's not already included in the tree
         if node:
             if not self.isPuzzleAlreadyInserted(node.puzzle):
-                self.frontier.append((node, actualCost+1))
+                self.frontier.append((node, actualCost + 1))
                 self.exploredPuzzles.append(node.puzzle)
 
     def execute(self):

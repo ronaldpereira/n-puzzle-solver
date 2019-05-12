@@ -12,7 +12,8 @@ class IterativeDeepeningSearch:
         self.answerPuzzle = answerPuzzle
         self.frontier = []
         self.frontier.append(
-            (STTREE.StateNode(initialPuzzle.puzzle, initialPuzzle.n), 0, 0))
+            (STTREE.StateNode(initialPuzzle.puzzle, initialPuzzle.n), 0, 0)
+        )
 
     def checkNodeSolution(self, nodePuzzle):
         return np.array_equal(nodePuzzle, self.answerPuzzle.puzzle)
@@ -20,14 +21,14 @@ class IterativeDeepeningSearch:
     def insertNodeToFrontier(self, node, actualCost, actualLevel):
         # If the node action exists and it's not already included in the tree
         if node:
-            self.frontier.append((node, actualCost+1, actualLevel+1))
+            self.frontier.append((node, actualCost + 1, actualLevel + 1))
 
     def execute(self):
         actualMaxLevel = 0
         while True:
             while len(self.frontier) > 0:
                 # Make the actual level infinite so the while can take effect
-                actualLevel = float('inf')
+                actualLevel = float("inf")
                 while actualLevel > actualMaxLevel and len(self.frontier) > 0:
                     actualNode, actualCost, actualLevel = self.frontier.pop()
 
@@ -41,16 +42,23 @@ class IterativeDeepeningSearch:
 
                         # Inverted the insert logic, so it becomes a stack
                         self.insertNodeToFrontier(
-                            actualNode.right, actualCost, actualLevel)
+                            actualNode.right, actualCost, actualLevel
+                        )
                         self.insertNodeToFrontier(
-                            actualNode.left, actualCost, actualLevel)
+                            actualNode.left, actualCost, actualLevel
+                        )
                         self.insertNodeToFrontier(
-                            actualNode.down, actualCost, actualLevel)
+                            actualNode.down, actualCost, actualLevel
+                        )
                         self.insertNodeToFrontier(
-                            actualNode.up, actualCost, actualLevel)
+                            actualNode.up, actualCost, actualLevel
+                        )
 
             # If no answer has been found on actual maximum level, try again with +1 level
             actualMaxLevel += 1
             # Restarts the search from the first state
-            self.__init__(deepcopy(self.initialPuzzle), deepcopy(
-                self.answerPuzzle), self.totalExpansions)
+            self.__init__(
+                deepcopy(self.initialPuzzle),
+                deepcopy(self.answerPuzzle),
+                self.totalExpansions,
+            )
